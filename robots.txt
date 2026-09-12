@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infoprabintech-cpu.github.io/prince-digital-zone-official/sitemap.xml
