@@ -1,0 +1,17 @@
+{
+  "name": "Prince Digital Zone",
+  "short_name": "Prince Digital",
+  "start_url": "/prince-digital-zone-official/",
+  "scope": "/prince-digital-zone-official/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "description": "Prince Digital Zone - Digital Services, Computer Training and IT Support in Rupandehi, Nepal.",
+  "icons": [
+    {
+      "src": "prince.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
