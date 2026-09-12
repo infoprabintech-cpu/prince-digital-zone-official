@@ -121,7 +121,15 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f172a">
 </head>
-
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Prince Digital Zone app ready"))
+        .catch((error) => console.log("Service Worker error:", error));
+    });
+  }
+</script>
 <body class="bg-[#030914] text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-white relative">
 
   <!-- WhatsApp Floating Action Trigger -->
