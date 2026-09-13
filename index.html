@@ -221,8 +221,15 @@
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Topup & Cards
           </a>
           <a href="#contact" class="nav-link hover:text-cyan-400 transition-colors">Contact</a>
+          
         </nav>
-
+<!-- Navbar Pay Button -->
+<button type="button" onclick="openPaymentModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-all shadow-md shadow-emerald-600/20 cursor-pointer">
+  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+    <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+  </svg>
+  <span>Pay Now</span>
+</button>
         <!-- CTA Call Button -->
         <div class="hidden md:flex items-center gap-3">
           <a href="https://wa.me/9779865451806" 
@@ -2205,10 +2212,9 @@
       </div>
 
       <!-- Bottom Row: Copyright & Developer -->
-      <div class="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-500 text-[11px]">
-        <p>© 2026 Prince Digital Zone. All rights reserved.</p>
-        <p class="text-slate-400">Developed by <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" class="text-cyan-400 hover:underline">Prabin Chaudhary</a></p>
-      </div>
+     <div class="pt-4 border-t border-slate-800/80 text-center text-slate-500 text-[11px]">
+  <p>© 2026 Prince Digital Zone. All rights reserved.</p>
+</div>
 
     </div>
   </footer>
@@ -2439,6 +2445,167 @@
     document.getElementById('modal-em-btn').href = `mailto:${adminEmail}?subject=Payment Verification - ${name}&body=Hello,%0D%0A%0D%0AName: ${name}%0D%0AAmount: Rs.${amount}%0D%0APurpose: ${purpose}%0D%0AMethod: ${modalActiveMethod}%0D%0A%0D%0APlease verify the attached screenshot.`;
 
     document.getElementById('modal-thank-you').style.display = 'block';
+  }
+</script>
+<!-- ================= PAYMENT POPUP MODAL ================= -->
+<div id="payment-modal" class="fixed inset-0 z-[99999] hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+  
+  <div class="relative w-full max-w-md bg-[#040914] border border-slate-800 rounded-2xl p-5 text-slate-200 shadow-2xl max-h-[90vh] overflow-y-auto">
+    
+    <!-- Close Button -->
+    <button type="button" onclick="closePaymentModal()" class="absolute top-3.5 right-4 text-slate-400 hover:text-white text-xl font-bold leading-none cursor-pointer">
+      &times;
+    </button>
+    
+    <!-- Modal Title -->
+    <div class="text-center mb-4">
+      <h3 class="text-base font-bold text-white">Scan & Pay</h3>
+      <p class="text-[11px] text-slate-400 mt-0.5">QR स्क्यान गरी भुक्तानी गर्नुहोस् र स्क्रिनसट पठाउनुहोस्</p>
+    </div>
+
+    <!-- 4 Tabs (eSewa, Khalti, Fonepay, Bank) -->
+    <div class="grid grid-cols-4 gap-1 p-1 bg-slate-900 rounded-xl border border-slate-800 text-xs font-semibold">
+      <button type="button" onclick="selectModalQR('esewa', 'esewa.jpg')" id="modal-tab-esewa" class="modal-tab py-1.5 rounded-lg bg-emerald-600 text-white transition-all">eSewa</button>
+      <button type="button" onclick="selectModalQR('khalti', 'khalti.jpg')" id="modal-tab-khalti" class="modal-tab py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Khalti</button>
+      <button type="button" onclick="selectModalQR('fonepay', 'fonepay.jpg')" id="modal-tab-fonepay" class="modal-tab py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Fonepay</button>
+      <button type="button" onclick="selectModalQR('bank', 'bank.jpg')" id="modal-tab-bank" class="modal-tab py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Bank</button>
+    </div>
+
+    <!-- Privacy QR Container (Click to Reveal) -->
+    <div class="mt-4 flex flex-col items-center bg-[#02050d] p-3 rounded-xl border border-slate-800/80">
+      <div class="relative w-44 h-44 bg-white p-2 rounded-lg flex items-center justify-center overflow-hidden shadow-inner">
+        
+        <!-- QR Image (Initially Blurred) -->
+        <img id="modal-qr-img" src="esewa.jpg" alt="Payment QR" class="w-full h-full object-contain blur-md transition-all duration-300" onerror="this.src='https://placehold.co/200x200/040e1e/38bdf8?text=QR+Code';" />
+        
+        <!-- Click Reveal Overlay -->
+        <div id="modal-qr-overlay" onclick="toggleModalQR(true)" class="absolute inset-0 bg-[#040e1e]/90 flex flex-col items-center justify-center cursor-pointer text-center p-2">
+          <div class="w-8 h-8 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-1.5">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.89 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+            </svg>
+          </div>
+          <span class="text-xs font-semibold text-white">QR हेर्न क्लिक गर्नुहोस्</span>
+          <span class="text-[9px] text-slate-400 mt-0.5">Click to Reveal</span>
+        </div>
+      </div>
+
+      <div class="mt-2.5 flex items-center gap-2">
+        <span id="modal-qr-label" class="text-[11px] font-bold text-cyan-400 tracking-wide uppercase">eSewa QR Code</span>
+        <button type="button" id="modal-hide-btn" onclick="toggleModalQR(false)" class="hidden text-[10px] text-rose-400 underline cursor-pointer hover:text-rose-300">(लुकाउनुहोस्)</button>
+      </div>
+    </div>
+
+    <!-- Quick Submission Form -->
+    <form id="modal-form" onsubmit="handleModalSubmit(event)" class="mt-4 space-y-3">
+      <div>
+        <label class="block text-[11px] font-medium text-slate-300 mb-1">तपाईँको नाम (Full Name)</label>
+        <input type="text" id="m-name" required placeholder="eg: Ram Bahadur" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <div>
+          <label class="block text-[11px] font-medium text-slate-300 mb-1">रकम (Rs.)</label>
+          <input type="number" id="m-amount" required placeholder="eg: 1500" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-medium text-slate-300 mb-1">सेवा (Purpose)</label>
+          <input type="text" id="m-purpose" required placeholder="eg: IT Support" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-[11px] font-medium text-slate-300 mb-1">स्क्रिनसट छान्नुहोस् (Screenshot)</label>
+        <input type="file" id="m-file" accept="image/*" required class="w-full text-[11px] text-slate-400 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-medium file:bg-slate-800 file:text-cyan-400 hover:file:bg-slate-700 bg-slate-900 rounded-lg border border-slate-800" />
+      </div>
+
+      <button type="submit" class="w-full py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs rounded-lg shadow-md shadow-cyan-500/20 transition-all cursor-pointer">
+        सब्मिट गर्नुहोस् (Confirm)
+      </button>
+    </form>
+
+    <!-- Thank You Note & Direct Share (After Submit) -->
+    <div id="modal-success" class="hidden mt-4 p-3 bg-[#02050d] border border-emerald-500/40 rounded-xl text-center space-y-2.5">
+      <div class="text-xs font-bold text-emerald-400">✓ विवरण सुरक्षित भयो!</div>
+      <p class="text-[11px] text-slate-400">कृपया तुरुन्त प्रमाणिकरणका लागि तल क्लिक गरी स्क्रिनसट पठाउनुहोस्:</p>
+      
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <a id="modal-wa" href="#" target="_blank" class="py-1.5 px-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs rounded-lg transition-colors">
+          WhatsApp
+        </a>
+        <a id="modal-em" href="#" class="py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold text-xs rounded-lg border border-slate-700 transition-colors">
+          Email
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal Logic Script -->
+<script>
+  let activeModalTab = 'eSewa';
+
+  function openPaymentModal() {
+    const modal = document.getElementById('payment-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closePaymentModal() {
+    const modal = document.getElementById('payment-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function toggleModalQR(reveal) {
+    const qrImg = document.getElementById('modal-qr-img');
+    const overlay = document.getElementById('modal-qr-overlay');
+    const hideBtn = document.getElementById('modal-hide-btn');
+
+    if (reveal) {
+      qrImg.classList.remove('blur-md');
+      overlay.classList.add('hidden');
+      hideBtn.classList.remove('hidden');
+    } else {
+      qrImg.classList.add('blur-md');
+      overlay.classList.remove('hidden');
+      hideBtn.classList.add('hidden');
+    }
+  }
+
+  function selectModalQR(method, imgSrc) {
+    document.getElementById('modal-qr-img').src = imgSrc;
+    document.getElementById('modal-qr-label').innerText = method.toUpperCase() + ' QR CODE';
+    activeModalTab = method;
+    toggleModalQR(false);
+
+    document.querySelectorAll('.modal-tab').forEach(btn => {
+      btn.className = 'modal-tab py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+    });
+
+    const activeBtn = document.getElementById('modal-tab-' + method);
+    if (method === 'esewa') activeBtn.className = 'modal-tab py-1.5 rounded-lg bg-emerald-600 text-white shadow';
+    else if (method === 'khalti') activeBtn.className = 'modal-tab py-1.5 rounded-lg bg-purple-600 text-white shadow';
+    else if (method === 'fonepay') activeBtn.className = 'modal-tab py-1.5 rounded-lg bg-rose-600 text-white shadow';
+    else activeBtn.className = 'modal-tab py-1.5 rounded-lg bg-blue-600 text-white shadow';
+  }
+
+  function handleModalSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('m-name').value;
+    const amount = document.getElementById('m-amount').value;
+    const purpose = document.getElementById('m-purpose').value;
+
+    const adminPhone = "9779865451806"; // आफ्नो WhatsApp नम्बर
+    const adminEmail = "princedigital@gmail.com"; // आफ्नो Email ठेगाना
+
+    const msg = `नमस्ते, मैले भुक्तानी गरेको छु:%0A- नाम: ${name}%0A- रकम: रु ${amount}%0A- सेवा: ${purpose}%0A- माध्यम: ${activeModalTab}%0A%0A(स्क्रिनसट संलग्न छ, कृपया प्रमाणीकरण गरिदिनुहोला)`;
+
+    document.getElementById('modal-wa').href = `https://wa.me/${adminPhone}?text=${msg}`;
+    document.getElementById('modal-em').href = `mailto:${adminEmail}?subject=Payment Verification - ${name}&body=Hello,%0D%0A%0D%0AName: ${name}%0D%0AAmount: Rs.${amount}%0D%0APurpose: ${purpose}%0D%0AMethod: ${activeModalTab}%0D%0A%0D%0APlease check attached payment screenshot.`;
+
+    document.getElementById('modal-success').classList.remove('hidden');
   }
 </script>
 </body>
