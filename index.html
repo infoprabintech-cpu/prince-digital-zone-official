@@ -1885,6 +1885,143 @@
     document.getElementById('thank-you-box').scrollIntoView({ behavior: 'smooth' });
   }
 </script>
+  <!-- ================= PAYMENT POPUP MODAL (DIRECT CLEAR QR) ================= -->
+<div id="payment-modal" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 16px;">
+  
+  <div style="background-color: #040914; border: 1px solid #1e293b; border-radius: 16px; width: 100%; max-width: 420px; color: #e2e8f0; padding: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); position: relative; max-height: 90vh; overflow-y: auto;">
+    
+    <!-- Close Button (X) -->
+    <button type="button" onclick="closePaymentModal()" style="position: absolute; top: 12px; right: 14px; background: none; border: none; color: #94a3b8; font-size: 26px; cursor: pointer; line-height: 1;">&times;</button>
+    
+    <!-- Modal Header -->
+    <div style="text-align: center; margin-bottom: 14px;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #ffffff; margin: 0;">Scan & Pay Online</h3>
+      <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">QR स्क्यान गरी भुक्तानी गर्नुहोस् र स्क्रिनसट पठाउनुहोस्</p>
+    </div>
+
+    <!-- 4 Tabs (eSewa, Khalti, Fonepay, Bank) -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #0f172a; padding: 4px; border-radius: 10px; border: 1px solid #1e293b; font-size: 11px; font-weight: 600; text-align: center;">
+      <button type="button" onclick="selectModalQR('esewa', 'esewa.jpg')" id="modal-tab-esewa" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: #059669; color: #fff;">eSewa</button>
+      <button type="button" onclick="selectModalQR('khalti', 'khalti.jpg')" id="modal-tab-khalti" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Khalti</button>
+      <button type="button" onclick="selectModalQR('fonepay', 'fonepay.jpg')" id="modal-tab-fonepay" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Fonepay</button>
+      <button type="button" onclick="selectModalQR('bank', 'bank.jpg')" id="modal-tab-bank" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Bank</button>
+    </div>
+
+    <!-- QR Container (No Blur by default - Always Visible) -->
+    <div style="margin-top: 14px; display: flex; flex-direction: column; align-items: center; background: #02050d; padding: 14px; border-radius: 12px; border: 1px solid #1e293b;">
+      <div style="position: relative; width: 190px; height: 190px; background: #ffffff; padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        
+        <!-- Main QR Image (With Direct Fallback Generator) -->
+        <img id="modal-qr-img" src="esewa.jpg" alt="Payment QR" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Prince+Digital+Zone+Payment';" />
+
+      </div>
+
+      <div style="margin-top: 10px;">
+        <span id="modal-qr-label" style="font-size: 11px; font-weight: 700; color: #22d3ee; text-transform: uppercase;">ESEWA QR CODE</span>
+      </div>
+    </div>
+
+    <!-- Quick Form -->
+    <form id="modal-pay-form" onsubmit="handleModalSubmit(event)" style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">तपाईँको नाम (Full Name)</label>
+        <input type="text" id="m-name" required placeholder="eg: Ram Bahadur" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff; outline: none;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">रकम (Amount Rs.)</label>
+          <input type="number" id="m-amount" required placeholder="eg: 1500" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">सेवा (Purpose)</label>
+          <input type="text" id="m-purpose" required placeholder="eg: IT Support" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 8px 10px; font-size: 12px; color: #fff; outline: none;" />
+        </div>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">स्क्रिनसट (Screenshot)</label>
+        <input type="file" id="m-file" accept="image/*" required style="width: 100%; font-size: 11px; color: #94a3b8; box-sizing: border-box;" />
+      </div>
+
+      <button type="submit" style="margin-top: 4px; padding: 10px; background: linear-gradient(to right, #06b6d4, #2563eb); border: none; border-radius: 8px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer;">
+        सब्मिट गर्नुहोस् (Confirm Payment)
+      </button>
+    </form>
+
+    <!-- Thank You & Direct WhatsApp/Email Buttons -->
+    <div id="modal-success" style="display: none; margin-top: 14px; background: #02050d; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 14px; text-align: center;">
+      <div style="color: #34d399; font-size: 13px; font-weight: bold; margin-bottom: 4px;">✓ धन्यवाद! विवरण सुरक्षित भयो।</div>
+      <p style="font-size: 10px; color: #94a3b8; margin: 0 0 10px 0;">कृपया तुरुन्त प्रमाणित गर्न स्क्रिनसट यहाँ पठाउनुहोस्:</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <a id="modal-wa" href="#" target="_blank" style="padding: 8px 0; background: #059669; color: #fff; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block;">WhatsApp</a>
+        <a id="modal-em" href="#" style="padding: 8px 0; background: #1e293b; color: #38bdf8; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block; border: 1px solid #334155;">Email</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= JAVASCRIPT CONTROLLER ================= -->
+<script>
+  let activeWallet = 'eSewa';
+
+  function openPaymentModal() {
+    document.getElementById('payment-modal').style.display = 'flex';
+  }
+
+  function closePaymentModal() {
+    document.getElementById('payment-modal').style.display = 'none';
+  }
+
+  function selectModalQR(method, imgSrc) {
+    activeWallet = method;
+    document.getElementById('modal-qr-label').innerText = method.toUpperCase() + ' QR CODE';
+    
+    // QR तस्विर परिवर्तन
+    const qrImg = document.getElementById('modal-qr-img');
+    qrImg.src = imgSrc;
+    qrImg.onerror = function() {
+      this.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Prince+Digital+Zone+${method.toUpperCase()}`;
+    };
+
+    // Tabs Active State
+    ['esewa', 'khalti', 'fonepay', 'bank'].forEach(m => {
+      const btn = document.getElementById('modal-tab-' + m);
+      if (btn) {
+        btn.style.background = 'transparent';
+        btn.style.color = '#94a3b8';
+      }
+    });
+
+    const activeBtn = document.getElementById('modal-tab-' + method);
+    if (activeBtn) {
+      activeBtn.style.color = '#ffffff';
+      if (method === 'esewa') activeBtn.style.background = '#059669';
+      else if (method === 'khalti') activeBtn.style.background = '#9333ea';
+      else if (method === 'fonepay') activeBtn.style.background = '#e11d48';
+      else activeBtn.style.background = '#2563eb';
+    }
+  }
+
+  function handleModalSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('m-name').value;
+    const amount = document.getElementById('m-amount').value;
+    const purpose = document.getElementById('m-purpose').value;
+
+    const adminPhone = "9779865451806"; 
+    const adminEmail = "princedigital@gmail.com"; 
+
+    const msg = `नमस्ते, मैले भुक्तानी गरेको छु:%0A- नाम: ${name}%0A- रकम: रु ${amount}%0A- सेवा: ${purpose}%0A- माध्यम: ${activeWallet}%0A%0A(स्क्रिनसट संलग्न छ, कृपया प्रमाणीकरण गरिदिनुहोला)`;
+
+    document.getElementById('modal-wa').href = `https://wa.me/${adminPhone}?text=${msg}`;
+    document.getElementById('modal-em').href = `mailto:${adminEmail}?subject=Payment Verification - ${name}&body=Hello,%0D%0A%0D%0AName: ${name}%0D%0AAmount: Rs.${amount}%0D%0APurpose: ${purpose}%0D%0AMethod: ${activeWallet}%0D%0A%0D%0APlease check attached screenshot.`;
+
+    document.getElementById('modal-success').style.display = 'block';
+  }
+</script>
   <!-- २. Footer (पेमेन्ट सेक्सन भन्दा बाहिर, छुट्टै राख्नुहोस्) -->
   <footer class="w-full bg-[#02050d] border-t border-slate-800 text-slate-400 text-xs py-8 mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
