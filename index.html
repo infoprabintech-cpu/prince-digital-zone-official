@@ -2150,12 +2150,13 @@
          
         </a>
       </div>
-  <!-- Footer -->
-<footer class="bg-[#02050d] border-t border-slate-800 text-slate-400 text-xs py-10">
+  </html>
+<!-- ================= FOOTER ================= -->
+<footer class="w-full bg-[#02050d] border-t border-slate-800 text-slate-400 text-xs py-10">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
     
-    <!-- Main Flex Row -->
-    <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+    <!-- Top Row: Brand Info, Links, Pay Button & Socials -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
       
       <!-- Brand & Location -->
       <div class="flex items-center gap-3 shrink-0">
@@ -2165,20 +2166,20 @@
         </div>
         <div class="text-left">
           <span class="font-bold text-white text-sm whitespace-nowrap block">Prince Digital Zone</span>
-          <span class="text-[11px] text-slate-400 block">Kanchan-05, Rupandehi, Lumbini Province, Nepal</span>
+          <span class="text-[11px] text-slate-400 block whitespace-nowrap">Kanchan-05, Rupandehi, Lumbini Province, Nepal</span>
         </div>
       </div>
 
       <!-- Navigation Links + Pay Now Button -->
-      <div class="flex flex-wrap justify-center items-center gap-4 text-slate-300 text-xs font-medium">
-        <a href="#services" class="hover:text-cyan-400 transition-colors">Services</a>
-        <a href="#it-services" class="hover:text-cyan-400 transition-colors">IT Support</a>
-        <a href="#courses" class="hover:text-cyan-400 transition-colors">Training</a>
-        <a href="#ticketing" class="hover:text-cyan-400 transition-colors">Tickets</a>
-        <a href="#gaming" class="hover:text-cyan-400 transition-colors">Game Topup</a>
+      <div class="flex flex-wrap items-center justify-center gap-4 text-slate-300 text-xs font-medium">
+        <a href="#services" class="whitespace-nowrap hover:text-cyan-400 transition-colors">Services</a>
+        <a href="#it-services" class="whitespace-nowrap hover:text-cyan-400 transition-colors">IT Support</a>
+        <a href="#courses" class="whitespace-nowrap hover:text-cyan-400 transition-colors">Training</a>
+        <a href="#ticketing" class="whitespace-nowrap hover:text-cyan-400 transition-colors">Tickets</a>
+        <a href="#gaming" class="whitespace-nowrap hover:text-cyan-400 transition-colors">Game Topup</a>
         
-        <!-- Pay Now Button in line -->
-        <a href="#payment-section" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-500/20 transition-all">
+        <!-- Pay Now Button (Direct Link to Payment Section) -->
+        <a href="#payment-section" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs whitespace-nowrap shadow-md shadow-emerald-500/20 transition-all">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
           </svg>
@@ -2186,7 +2187,7 @@
         </a>
       </div>
 
-      <!-- Social Icons -->
+      <!-- Social Media Profiles -->
       <div class="flex items-center gap-3 shrink-0">
         <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Profile" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -2202,15 +2203,13 @@
 
     </div>
 
-    <!-- Bottom Row: Legal & Copyright -->
+    <!-- Bottom Row: Copyright & Developer Credit -->
     <div class="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-500 text-[11px]">
       <p>© 2026 Prince Digital Zone. All rights reserved.</p>
       <p class="text-slate-400">Developed by <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" class="text-cyan-400 hover:underline">Prabin Chaudhary</a></p>
     </div>
 
   </div>
-</footer>
-
 </footer>
 
 <!-- ================= JAVASCRIPT LOGIC ================= -->
@@ -2227,7 +2226,7 @@
     }
 
     const msg = `नमस्ते, म Prince Digital Zone मा भर्ना/सोधपुछका लागि फारम भर्दैछु:%0A- नाम: ${name}%0A- फोन: ${phone}%0A- कोर्स: ${course}`;
-    window.open(`https://wa.me/9779865451806?text=${msg}`, '_blank'); // आफ्नो WhatsApp नम्बर फेर्नुहोला
+    window.open(`https://wa.me/9779865451806?text=${msg}`, '_blank');
   }
 
   // २. Repair Tracker Demo DB
@@ -2288,11 +2287,11 @@
   // ५. QR Modal Toggle
   function toggleQRModal() {
     const modal = document.getElementById('qrModal');
-    modal.classList.toggle('hidden');
+    if (modal) {
+      modal.classList.toggle('hidden');
+    }
   }
-</script> 
-</html>
+</script>
 
-  
 </body>
 </html>
