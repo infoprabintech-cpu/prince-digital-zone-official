@@ -2150,68 +2150,68 @@
          
         </a>
       </div>
+  </section>
   </html>
-<!-- ================= FOOTER ================= -->
-<footer style="width: 100% !important; background-color: #02050d; border-top: 1px solid #1e293b; color: #94a3b8; font-size: 12px; padding: 32px 16px; box-sizing: border-box;">
-  <div style="width: 100%; max-width: 1350px; margin: 0 auto; box-sizing: border-box;">
+<!-- १. Payment Section (यसलाई यहाँ बन्द गर्नुहोस्) -->
+  <section id="payment-section" class="scroll-mt-24 max-w-xl mx-auto my-8 bg-[#040914] border border-slate-800 text-slate-200 rounded-2xl p-6 shadow-2xl">
     
-    <!-- Top Row: Desktop ma Sidha 3-Part Layout -->
-    <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; width: 100%; flex-wrap: nowrap;">
+    <!-- पेमेन्टको सबै कोड (QR, Form आदि) यहाँ रहन्छ -->
+
+  </section> <!-- <--- यो </section> बन्द भएपछि मात्र तल फुटर सुरु हुनुपर्छ -->
+
+
+  <!-- २. Footer (पेमेन्ट सेक्सन भन्दा बाहिर, छुट्टै राख्नुहोस्) -->
+  <footer class="w-full bg-[#02050d] border-t border-slate-800 text-slate-400 text-xs py-8 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
       
-      <!-- 1. Left: Brand & Location -->
-      <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
-        <div style="width: 44px; height: 44px; border-radius: 12px; padding: 2px; background: linear-gradient(to top right, #22d3ee, #2563eb); flex-shrink: 0; overflow: hidden;">
-          <img src="prince.jpg" alt="Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div style="display: none; width: 100%; height: 100%; background: #040e1e; border-radius: 10px; align-items: center; justify-content: center; font-weight: bold; color: #22d3ee; font-size: 12px;">PD</div>
-        </div>
-        <div style="text-align: left;">
-          <span style="font-weight: 700; color: #ffffff; font-size: 14px; display: block; white-space: nowrap;">Prince Digital Zone</span>
-          <span style="font-size: 11px; color: #94a3b8; display: block; white-space: nowrap; margin-top: 2px;">Kanchan-05, Rupandehi, Lumbini Province, Nepal</span>
-        </div>
-      </div>
-
-      <!-- 2. Middle: Links + Pay Now Button -->
-      <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: nowrap; flex-shrink: 0;">
-        <a href="#services" style="color: #cbd5e1; text-decoration: none; white-space: nowrap; font-size: 12px;">Services</a>
-        <a href="#it-services" style="color: #cbd5e1; text-decoration: none; white-space: nowrap; font-size: 12px;">IT Support</a>
-        <a href="#courses" style="color: #cbd5e1; text-decoration: none; white-space: nowrap; font-size: 12px;">Training</a>
-        <a href="#ticketing" style="color: #cbd5e1; text-decoration: none; white-space: nowrap; font-size: 12px;">Tickets</a>
-        <a href="#gaming" style="color: #cbd5e1; text-decoration: none; white-space: nowrap; font-size: 12px;">Game Topup</a>
+      <!-- Top Row -->
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
         
-        <!-- Pay Now Button -->
-        <a href="#payment-section" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 8px; background-color: #059669; color: #ffffff; font-weight: 600; font-size: 12px; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);">
-          <svg style="width: 14px; height: 14px; fill: currentColor;" viewBox="0 0 24 24">
-            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-          </svg>
-          <span>Pay Now</span>
-        </a>
+        <!-- Brand & Location -->
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="w-10 h-10 rounded-xl p-0.5 bg-gradient-to-tr from-cyan-400 to-blue-600 overflow-hidden shrink-0 shadow-md">
+            <img src="prince.jpg" alt="Logo" class="w-full h-full object-cover rounded-[10px]" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div style="display:none;" class="w-full h-full bg-[#040e1e] rounded-[10px] items-center justify-center font-bold text-cyan-400 text-xs">PD</div>
+          </div>
+          <div class="text-left">
+            <span class="font-bold text-white text-sm whitespace-nowrap block">Prince Digital Zone</span>
+            <span class="text-[11px] text-slate-400 block whitespace-nowrap">Kanchan-05, Rupandehi, Lumbini Province, Nepal</span>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="flex flex-wrap items-center justify-center gap-5 text-slate-300 text-xs font-medium">
+          <a href="#services" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Services</a>
+          <a href="#it-services" class="hover:text-cyan-400 transition-colors whitespace-nowrap">IT Support</a>
+          <a href="#courses" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Training</a>
+          <a href="#ticketing" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Tickets</a>
+          <a href="#gaming" class="hover:text-cyan-400 transition-colors whitespace-nowrap">Game Topup</a>
+        </div>
+
+        <!-- Social Media Profiles -->
+        <div class="flex items-center gap-3 shrink-0">
+          <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Profile" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/40 transition-all">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+          <a href="https://github.com/infoprabintech-cpu" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-600 transition-all">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+
       </div>
 
-      <!-- 3. Right: Social Icons -->
-      <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
-        <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="width: 36px; height: 36px; border-radius: 8px; background-color: #0f172a; border: 1px solid #1e293b; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none;">
-          <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </a>
-        <a href="https://github.com/infoprabintech-cpu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="width: 36px; height: 36px; border-radius: 8px; background-color: #0f172a; border: 1px solid #1e293b; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none;">
-          <svg style="width: 16px; height: 16px; fill: currentColor;" viewBox="0 0 24 24">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-        </a>
+      <!-- Bottom Row: Copyright & Developer -->
+      <div class="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-500 text-[11px]">
+        <p>© 2026 Prince Digital Zone. All rights reserved.</p>
+        <p class="text-slate-400">Developed by <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" class="text-cyan-400 hover:underline">Prabin Chaudhary</a></p>
       </div>
 
     </div>
-
-    <!-- Bottom Row: Copyright & Developer Credit -->
-    <div style="border-top: 1px solid rgba(30, 41, 59, 0.8); margin-top: 24px; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #64748b;">
-      <p style="margin: 0;">© 2026 Prince Digital Zone. All rights reserved.</p>
-      <p style="margin: 0; color: #94a3b8;">Developed by <a href="https://www.facebook.com/prabinchaudhary.official/" target="_blank" style="color: #22d3ee; text-decoration: none;">Prabin Chaudhary</a></p>
-    </div>
-
-  </div>
-</footer>
-
+  </footer>
 <!-- ================= JAVASCRIPT LOGIC ================= -->
 <script>
   // १. Admission Form via WhatsApp
@@ -2292,6 +2292,154 @@
     }
   }
 </script>
+<!-- ================= POPUP PAYMENT MODAL ================= -->
+<div id="payment-popup-modal" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); align-items: center; justify-content: center; padding: 16px;">
+  
+  <div style="background-color: #040914; border: 1px solid #1e293b; border-radius: 16px; width: 100%; max-width: 420px; color: #e2e8f0; padding: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); position: relative; max-height: 90vh; overflow-y: auto;">
+    
+    <!-- Close Button -->
+    <button type="button" onclick="closePaymentModal()" style="position: absolute; top: 12px; right: 14px; background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; line-height: 1;">&times;</button>
+    
+    <!-- Title -->
+    <div style="text-align: center; margin-bottom: 14px;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #ffffff; margin: 0;">Quick Payment</h3>
+      <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">QR स्क्यान गरी भुक्तानी गर्नुहोस् र स्क्रिनसट पठाउनुहोस्</p>
+    </div>
 
+    <!-- 4 Tabs (eSewa, Khalti, Fonepay, Bank) -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #0f172a; padding: 4px; border-radius: 10px; border: 1px solid #1e293b; font-size: 11px; font-weight: 600; text-align: center;">
+      <button type="button" onclick="selectModalPayment('esewa', 'esewa.jpg')" id="modal-tab-esewa" style="padding: 6px 0; border-radius: 6px; border: none; cursor: pointer; background: #059669; color: #fff;">eSewa</button>
+      <button type="button" onclick="selectModalPayment('khalti', 'khalti.jpg')" id="modal-tab-khalti" style="padding: 6px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Khalti</button>
+      <button type="button" onclick="selectModalPayment('fonepay', 'fonepay.jpg')" id="modal-tab-fonepay" style="padding: 6px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Fonepay</button>
+      <button type="button" onclick="selectModalPayment('bank', 'bank.jpg')" id="modal-tab-bank" style="padding: 6px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Bank</button>
+    </div>
+
+    <!-- QR Container with Privacy Blur & Click Reveal -->
+    <div style="margin-top: 14px; display: flex; flex-direction: column; align-items: center; background: #02050d; padding: 14px; border-radius: 12px; border: 1px solid #1e293b;">
+      <div style="position: relative; width: 180px; height: 180px; background: #ffffff; padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <img id="modal-qr-img" src="esewa.jpg" alt="Payment QR" style="width: 100%; height: 100%; object-fit: contain; filter: blur(6px); transition: all 0.3s;" onerror="this.src='https://placehold.co/200x200/040e1e/38bdf8?text=QR+Not+Found';" />
+        
+        <!-- Click to Reveal Curtain -->
+        <div id="modal-qr-overlay" onclick="toggleModalQR(true)" style="position: absolute; inset: 0; background: rgba(4, 14, 30, 0.88); backdrop-filter: blur(2px); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-align: center; padding: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); display: flex; align-items: center; justify-content: center; color: #22d3ee; margin-bottom: 4px;">
+            <svg style="width: 14px; height: 14px; fill: currentColor;" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.89 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+          </div>
+          <span style="font-size: 11px; font-weight: 600; color: #ffffff;">QR हेर्न थिच्नुहोस्</span>
+          <span style="font-size: 9px; color: #94a3b8;">Click to Reveal</span>
+        </div>
+      </div>
+
+      <div style="margin-top: 8px; display: flex; align-items: center; gap: 8px;">
+        <span id="modal-qr-label" style="font-size: 11px; font-weight: 600; color: #22d3ee; text-transform: uppercase;">ESEWA QR CODE</span>
+        <button type="button" id="modal-hide-btn" onclick="toggleModalQR(false)" style="display: none; font-size: 10px; color: #f43f5e; background: none; border: none; cursor: pointer; text-decoration: underline;">(लुकाउनुहोस्)</button>
+      </div>
+    </div>
+
+    <!-- Quick Form -->
+    <form id="modal-pay-form" onsubmit="handleModalPaymentSubmit(event)" style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">नाम (Full Name)</label>
+        <input type="text" id="modal-payer-name" required placeholder="Ram Bahadur" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">रकम (Amount Rs.)</label>
+          <input type="number" id="modal-pay-amount" required placeholder="1500" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">सेवा (Service)</label>
+          <input type="text" id="modal-pay-purpose" required placeholder="Computer Course" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+        </div>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px;">स्क्रिनसट (Screenshot)</label>
+        <input type="file" id="modal-ss-input" accept="image/*" required style="width: 100%; font-size: 10px; color: #94a3b8; box-sizing: border-box;" />
+      </div>
+
+      <button type="submit" style="margin-top: 4px; padding: 8px 12px; background: linear-gradient(to right, #06b6d4, #2563eb); border: none; border-radius: 6px; color: #fff; font-size: 12px; font-weight: bold; cursor: pointer;">
+        सब्मिट गर्नुहोस् (Confirm)
+      </button>
+    </form>
+
+    <!-- Thank You Box -->
+    <div id="modal-thank-you" style="display: none; margin-top: 14px; background: #02050d; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 14px; text-align: center;">
+      <div style="color: #34d399; font-size: 13px; font-weight: bold; margin-bottom: 4px;">✓ धन्यवाद! विवरण सुरक्षित भयो।</div>
+      <p style="font-size: 10px; color: #94a3b8; margin: 0 0 10px 0;">तुरुन्त प्रमाणित गर्न स्क्रिनसट यहाँ पठाउनुहोस्:</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <a id="modal-wa-btn" href="#" target="_blank" style="padding: 7px 0; background: #059669; color: #fff; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block;">WhatsApp</a>
+        <a id="modal-em-btn" href="#" style="padding: 7px 0; background: #1e293b; color: #38bdf8; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block; border: 1px solid #334155;">Email</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let modalActiveMethod = 'eSewa';
+
+  function openPaymentModal() {
+    document.getElementById('payment-popup-modal').style.display = 'flex';
+  }
+
+  function closePaymentModal() {
+    document.getElementById('payment-popup-modal').style.display = 'none';
+  }
+
+  function toggleModalQR(reveal) {
+    const qrImg = document.getElementById('modal-qr-img');
+    const overlay = document.getElementById('modal-qr-overlay');
+    const hideBtn = document.getElementById('modal-hide-btn');
+
+    if (reveal) {
+      qrImg.style.filter = 'none';
+      overlay.style.display = 'none';
+      hideBtn.style.display = 'inline';
+    } else {
+      qrImg.style.filter = 'blur(6px)';
+      overlay.style.display = 'flex';
+      hideBtn.style.display = 'none';
+    }
+  }
+
+  function selectModalPayment(method, imgSrc) {
+    document.getElementById('modal-qr-img').src = imgSrc;
+    document.getElementById('modal-qr-label').innerText = method.toUpperCase() + ' QR CODE';
+    modalActiveMethod = method;
+    toggleModalQR(false);
+
+    ['esewa', 'khalti', 'fonepay', 'bank'].forEach(m => {
+      const btn = document.getElementById('modal-tab-' + m);
+      btn.style.background = 'transparent';
+      btn.style.color = '#94a3b8';
+    });
+
+    const activeBtn = document.getElementById('modal-tab-' + method);
+    activeBtn.style.color = '#ffffff';
+    if (method === 'esewa') activeBtn.style.background = '#059669';
+    else if (method === 'khalti') activeBtn.style.background = '#9333ea';
+    else if (method === 'fonepay') activeBtn.style.background = '#e11d48';
+    else activeBtn.style.background = '#2563eb';
+  }
+
+  function handleModalPaymentSubmit(e) {
+    e.preventDefault();
+    const name = document.getElementById('modal-payer-name').value;
+    const amount = document.getElementById('modal-pay-amount').value;
+    const purpose = document.getElementById('modal-pay-purpose').value;
+
+    const adminPhone = "9779865451806"; // आफ्नो WhatsApp नम्बर
+    const adminEmail = "princedigital@gmail.com"; // आफ्नो Email
+
+    const msg = `नमस्ते, मैले भुक्तानी गरेको छु:%0A- नाम: ${name}%0A- रकम: रु ${amount}%0A- सेवा: ${purpose}%0A- माध्यम: ${modalActiveMethod}%0A%0A(स्क्रिनसट संलग्न छ, कृपया प्रमाणीकरण गरिदिनुहोला)`;
+
+    document.getElementById('modal-wa-btn').href = `https://wa.me/${adminPhone}?text=${msg}`;
+    document.getElementById('modal-em-btn').href = `mailto:${adminEmail}?subject=Payment Verification - ${name}&body=Hello,%0D%0A%0D%0AName: ${name}%0D%0AAmount: Rs.${amount}%0D%0APurpose: ${purpose}%0D%0AMethod: ${modalActiveMethod}%0D%0A%0D%0APlease verify the attached screenshot.`;
+
+    document.getElementById('modal-thank-you').style.display = 'block';
+  }
+</script>
 </body>
 </html>
