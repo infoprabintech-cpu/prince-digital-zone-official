@@ -194,7 +194,7 @@
       <!-- Desktop Action Buttons (Pay Now + WhatsApp Us) -->
       <div class="hidden md:flex items-center gap-2.5 shrink-0">
         <!-- Pay Now Button -->
-       <button type="button" onclick="document.getElementById('payment-modal').style.setProperty('display', 'flex', 'important')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-500/20 transition-all cursor-pointer">
+      <button type="button" onclick="event.preventDefault(); event.stopPropagation(); window.openPayModal();" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md shadow-emerald-500/20 transition-all cursor-pointer">
   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
   <span>Pay Now</span>
 </button>
@@ -2587,6 +2587,137 @@
     var adminEmail = "princedigital@gmail.com"; 
 
     var msg = "नमस्ते, मैले भुक्तानी गरेको छु:%0A- नाम: " + encodeURIComponent(name) + "%0A- रकम: रु " + encodeURIComponent(amount) + "%0A- सेवा: " + encodeURIComponent(service) + "%0A- माध्यम: " + encodeURIComponent(currentWallet);
+
+    document.getElementById('pay-wa-link').href = "https://wa.me/" + adminPhone + "?text=" + msg;
+    document.getElementById('pay-em-link').href = "mailto:" + adminEmail + "?subject=Payment%20Verification&body=" + msg;
+
+    document.getElementById('pay-success-box').style.display = 'block';
+  }
+</script>
+  <!-- ================= COMPLETE STABLE PAYMENT MODAL ================= -->
+<div id="payment-modal" style="display: none; position: fixed; inset: 0; z-index: 9999999; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px); align-items: center; justify-content: center; padding: 16px;">
+  
+  <div onclick="event.stopPropagation();" style="background-color: #040914; border: 1px solid #1e293b; border-radius: 16px; width: 100%; max-width: 410px; color: #e2e8f0; padding: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.9); position: relative; max-height: 90vh; overflow-y: auto;">
+    
+    <!-- Close Button (X) -->
+    <button type="button" onclick="event.preventDefault(); window.closePayModal();" style="position: absolute; top: 10px; right: 14px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #cbd5e1; width: 32px; height: 32px; font-size: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1;">&times;</button>
+    
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 12px; padding-right: 25px;">
+      <h3 style="font-size: 16px; font-weight: 700; color: #ffffff; margin: 0;">Scan & Pay Online</h3>
+      <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">QR स्क्यान गरी भुक्तानी गर्नुहोस् र स्क्रिनसट पठाउनुहोस्</p>
+    </div>
+
+    <!-- 4 Tabs (eSewa, Khalti, Fonepay, Bank) -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; background: #0f172a; padding: 4px; border-radius: 10px; border: 1px solid #1e293b; font-size: 11px; font-weight: 600; text-align: center;">
+      <button type="button" onclick="event.preventDefault(); switchWallet('esewa', 'esewa.jpg')" id="tab-esewa" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: #059669; color: #fff;">eSewa</button>
+      <button type="button" onclick="event.preventDefault(); switchWallet('khalti', 'khalti.jpg')" id="tab-khalti" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Khalti</button>
+      <button type="button" onclick="event.preventDefault(); switchWallet('fonepay', 'fonepay.jpg')" id="tab-fonepay" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Fonepay</button>
+      <button type="button" onclick="event.preventDefault(); switchWallet('bank', 'bank.jpg')" id="tab-bank" style="padding: 7px 0; border-radius: 6px; border: none; cursor: pointer; background: transparent; color: #94a3b8;">Bank</button>
+    </div>
+
+    <!-- QR Container -->
+    <div style="margin-top: 12px; display: flex; flex-direction: column; align-items: center; background: #02050d; padding: 12px; border-radius: 12px; border: 1px solid #1e293b;">
+      <div style="width: 180px; height: 180px; background: #ffffff; padding: 6px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <img id="active-qr-img" src="esewa.jpg" alt="Payment QR" style="width: 100%; height: 100%; object-fit: contain;" onerror="handleImageError(this)" />
+      </div>
+      <span id="active-qr-name" style="margin-top: 8px; font-size: 11px; font-weight: 700; color: #22d3ee; text-transform: uppercase;">ESEWA QR CODE</span>
+    </div>
+
+    <!-- Form -->
+    <form onsubmit="handlePayForm(event)" style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 3px;">नाम (Full Name)</label>
+        <input type="text" id="pay-name" required placeholder="Ram Bahadur" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 3px;">रकम (Amount)</label>
+          <input type="number" id="pay-amount" required placeholder="1500" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 3px;">सेवा (Service)</label>
+          <input type="text" id="pay-service" required placeholder="Service Name" style="width: 100%; box-sizing: border-box; background: #0f172a; border: 1px solid #1e293b; border-radius: 6px; padding: 7px 10px; font-size: 11px; color: #fff; outline: none;" />
+        </div>
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 11px; color: #94a3b8; margin-bottom: 3px;">स्क्रिनसट (Screenshot)</label>
+        <input type="file" id="pay-screenshot" accept="image/*" required style="width: 100%; font-size: 10px; color: #94a3b8; box-sizing: border-box;" />
+      </div>
+
+      <button type="submit" style="margin-top: 4px; padding: 9px; background: linear-gradient(to right, #06b6d4, #2563eb); border: none; border-radius: 6px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer;">
+        सब्मिट गर्नुहोस् (Confirm)
+      </button>
+    </form>
+
+    <!-- Success Box -->
+    <div id="pay-success-box" style="display: none; margin-top: 12px; background: #02050d; border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; padding: 12px; text-align: center;">
+      <div style="color: #34d399; font-size: 12px; font-weight: bold; margin-bottom: 4px;">✓ विवरण सुरक्षित भयो!</div>
+      <p style="font-size: 10px; color: #94a3b8; margin: 0 0 8px 0;">तुरुन्त प्रमाणिकरणका लागि स्क्रिनसट पठाउनुहोस्:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+        <a id="pay-wa-link" href="#" target="_blank" style="padding: 6px 0; background: #059669; color: #fff; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block;">WhatsApp</a>
+        <a id="pay-em-link" href="#" style="padding: 6px 0; background: #1e293b; color: #38bdf8; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; display: block; border: 1px solid #334155;">Email</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  window.currentSelectedWallet = 'esewa';
+
+  window.openPayModal = function() {
+    var modal = document.getElementById('payment-modal');
+    if (modal) modal.style.display = 'flex';
+  };
+
+  window.closePayModal = function() {
+    var modal = document.getElementById('payment-modal');
+    if (modal) modal.style.display = 'none';
+  };
+
+  function handleImageError(img) {
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Prince+Digital+Zone+' + window.currentSelectedWallet.toUpperCase();
+  }
+
+  function switchWallet(method, filePath) {
+    window.currentSelectedWallet = method;
+    var img = document.getElementById('active-qr-img');
+    var label = document.getElementById('active-qr-name');
+
+    if (label) label.innerText = method.toUpperCase() + ' QR CODE';
+    if (img) img.src = filePath;
+
+    ['esewa', 'khalti', 'fonepay', 'bank'].forEach(function(m) {
+      var btn = document.getElementById('tab-' + m);
+      if (btn) {
+        btn.style.background = 'transparent';
+        btn.style.color = '#94a3b8';
+      }
+    });
+
+    var activeBtn = document.getElementById('tab-' + method);
+    if (activeBtn) {
+      activeBtn.style.color = '#ffffff';
+      if (method === 'esewa') activeBtn.style.background = '#059669';
+      else if (method === 'khalti') activeBtn.style.background = '#9333ea';
+      else if (method === 'fonepay') activeBtn.style.background = '#e11d48';
+      else activeBtn.style.background = '#2563eb';
+    }
+  }
+
+  function handlePayForm(e) {
+    e.preventDefault();
+    var name = document.getElementById('pay-name').value;
+    var amount = document.getElementById('pay-amount').value;
+    var service = document.getElementById('pay-service').value;
+
+    var adminPhone = "9779865451806"; 
+    var adminEmail = "princedigital@gmail.com"; 
+
+    var msg = "नमस्ते, मैले भुक्तानी गरेको छु:%0A- नाम: " + encodeURIComponent(name) + "%0A- रकम: रु " + encodeURIComponent(amount) + "%0A- सेवा: " + encodeURIComponent(service) + "%0A- माध्यम: " + encodeURIComponent(window.currentSelectedWallet.toUpperCase());
 
     document.getElementById('pay-wa-link').href = "https://wa.me/" + adminPhone + "?text=" + msg;
     document.getElementById('pay-em-link').href = "mailto:" + adminEmail + "?subject=Payment%20Verification&body=" + msg;
