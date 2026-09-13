@@ -1416,6 +1416,30 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   }
+    const shareBtn = document.getElementById('shareBtn');
+
+if (shareBtn) {
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Prince Digital Zone',
+      text: 'Prince Digital Zone - Digital Services, IT Support, Online Ticketing & Computer Training in Rupandehi, Nepal.',
+      url: window.location.href,
+    };
+
+    // मोबाइलमा Native Share Sheet खोल्ने
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log('Share canceled');
+      }
+    } else {
+      // डेस्कटप वा सपोर्ट नगर्ने ब्राउजरमा लिङ्क सिधै क्लिपबोर्डमा कपि गर्ने
+      navigator.clipboard.writeText(window.location.href);
+      alert('Website link copied to clipboard!');
+    }
+  });
+}
 </script>
   <!-- PWA Install Popup Prompt -->
 <div id="pwa-install-banner" class="fixed bottom-5 left-4 right-4 md:left-auto md:right-6 md:w-96 z-50 hidden bg-slate-900/95 border border-cyan-500/30 backdrop-blur-xl p-4 rounded-2xl shadow-2xl shadow-cyan-500/20 text-white animate-bounce-short">
