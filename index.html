@@ -1428,34 +1428,7 @@ if (shareBtn) {
         console.log('Share canceled');
       }
     } else {
-      // डेस्कटप वा सपोर्ट नगर्ने ब्राउजरमा लिङ्क सिधै क्लिपबोर्डमा कपि गर्ने
-      navigator.clipboard.writeText(window.location.href);
-      alert('Website link copied to clipboard!');
-    }
-  });
-}
-   const floatingShareBtn = document.getElementById('floatingShareBtn');
-
-if (floatingShareBtn) {
-  floatingShareBtn.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Prince Digital Zone',
-      text: 'Prince Digital Zone - Digital Services, IT Support & Computer Training in Kanchan-05, Rupandehi.',
-      url: window.location.href
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.log('Dismissed');
-      }
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Website link copied to clipboard!');
-    }
-  });
-} 
+     
 </script>
   <!-- PWA Install Popup Prompt -->
 <div id="pwa-install-banner" class="fixed bottom-5 left-4 right-4 md:left-auto md:right-6 md:w-96 z-50 hidden bg-slate-900/95 border border-cyan-500/30 backdrop-blur-xl p-4 rounded-2xl shadow-2xl shadow-cyan-500/20 text-white animate-bounce-short">
@@ -1500,18 +1473,13 @@ if (floatingShareBtn) {
 </button>
   <!-- अरू सबै सेक्सनहरू (Hero, Services, Contact, Footer) सकिएपछि -->
 
-  <!-- 👇 यहाँ APK Download & Share को कोड राख्नुहोस् 👇 -->
-  <div class="fixed bottom-20 right-6 z-40 flex flex-col gap-2">
-    <!-- APK Download Button -->
-    <a href="prince-digital-zone.apk" download class="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white rounded-full shadow-lg shadow-teal-500/30 transition-transform active:scale-95 border border-teal-300/30 font-medium text-xs">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-      </svg>
-      <span>Download APK</span>
-    </a>
-
-   
-  </div>
+  <!-- Mobile Only APK Download Button (Hidden on PC, visible only on phones) -->
+<a href="app.apk" download="Prince-Digital-Zone.apk" class="md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white rounded-full text-xs font-semibold shadow-md shadow-emerald-500/20 active:scale-95 transition-all">
+  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+  </svg>
+  <span>Download APK</span>
+</a>
 
   <!-- JavaScript स्क्रिप्टहरू भए यहाँ तल रहन्छन् -->
   <script>
@@ -1520,16 +1488,7 @@ if (floatingShareBtn) {
 
 </body>
 </html>
-<!-- Floating APK Download & Share Button -->
-  <div class="fixed bottom-20 right-6 z-40 flex flex-col gap-2">
-    <!-- APK Download Button -->
-    <a href="app.apk" download="Prince-Digital-Zone.apk" class="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white rounded-full shadow-lg shadow-teal-500/30 transition-transform active:scale-95 border border-teal-300/30 font-medium text-xs">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-      </svg>
-      <span>Download APK</span>
-    
-    </a>
-  </div>
+
+  
 </body>
 </html>
